@@ -1,0 +1,29 @@
+{
+  "name": "airdrop",
+  "version": "0.0.1",
+  "description": "Airdrop interface for PICHU (Kylin Network)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify -t brfs index.js -o bundle.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kylin-Network/airdrop.git"
+  },
+  "author": "Kylin Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kylin-Network/airdrop/issues"
+  },
+  "homepage": "https://github.com/Kylin-Network/airdrop#readme",
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "eth-sig-util": "^2.1.0",
+    "ethereumjs-util": "^5.1.1"
+  },
+  "devDependencies": {
+    "brfs": "^1.6.1",
+    "browserify": "^16.2.3"
+  }
+}
