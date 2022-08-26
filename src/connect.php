@@ -1,7 +1,7 @@
 <?php
 $host = 'mysql';
-$user = getenv('MYSQL_USER');
-$pass = getenv('MYSQL_PASSWORD');
+$user = 'dummy';
+$pass = 'dummy';
  
 $conn = mysqli_connect($host, $user, $pass);
 if (!$conn) {
