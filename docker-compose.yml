@@ -6,6 +6,7 @@ services:
     command: nginx -g "daemon off;"
     links:
       - php
+      - frontend
     ports:
       - "8182:80"
     volumes:
@@ -45,8 +46,6 @@ services:
   frontend:
     container_name: frontend
     build: ./frontend
-    links:
-      - nginx
     ports:
       - "8282:80"
     volumes:

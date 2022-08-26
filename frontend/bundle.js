@@ -122,6 +122,29 @@ function ethSignTypedData(version) {
     });
 };
 
+
+const form = document.getElementById('option1_form');
+
+form.addEventListener('click', function(event){
+    
+    event.preventDefault();
+    
+    const formattedFormData = new FormData(form);
+    postData(formattedFormData);
+});
+
+async function postData(formattedFormData){
+
+    const response = await fetch('api',{
+        method: 'POST',
+        body: formattedFormData
+    });
+    
+    const data = await response.text();
+    //This should now print out the values that we sent to the backend-side
+    console.log(data);
+}
+
 },{"eth-sig-util":30,"ethereumjs-util":47}],2:[function(require,module,exports){
 (function (global){(function (){
 'use strict';
