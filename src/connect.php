@@ -1,3 +1,4 @@
+<?php
 $host = 'mysql';
 $user = getenv('MYSQL_USER');
 $pass = getenv('MYSQL_PASSWORD');
@@ -8,3 +9,4 @@ if (!$conn) {
 }
  
 echo 'Successful database connection!'.PHP_EOL;
+?>
