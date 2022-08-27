@@ -43,7 +43,7 @@
             <h3>Connect</h3>
         </div>
         <div class="col-6">
-            <button type="button" class="btn btn-dark" id="connectButton">Connect</button><input class="form-control" id="tokenHolder" type="text" readonly>
+            <button type="button" class="btn btn-dark" id="connectButton">Connect</button><input class="form-control" id="tokenHolder" name="tokenHolder" type="text" readonly>
         </div>
     </div>
     <div class="row border-bottom">
@@ -51,7 +51,7 @@
             <h3>Substrate account (<a href="https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fkusama.kylin-node.co.uk#/accounts" target="_blank">PICHU</a>)</h3>
         </div>
         <div class="col-6">
-            <input class="form-control" id="SubstrateAddress" type="text" placeholder="23ee...">
+            <input class="form-control" id="SubstrateAddress" type="text" placeholder="23ee..." name="SubstrateAddress">
         </div>
     </div>
     <div class="row border-bottom">
@@ -68,7 +68,7 @@
             <h3>Signature response</h3>
         </div>
         <div class="col-6">
-            <textarea class="form-control" id="AutoFinalSignature" rows="3" readonly></textarea>
+            <textarea class="form-control" id="AutoFinalSignature" name="AutoFinalSignature" rows="3" readonly></textarea>
         </div>
     </div>  
    
@@ -78,7 +78,7 @@
         </div>
         <div class="col-6">
             <input type="submit" value="Submit request using Option 1" class="btn btn-primary">
-            
+        
         </div>
     </div>  
 </div>

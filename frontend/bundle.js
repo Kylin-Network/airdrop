@@ -129,7 +129,11 @@ form.addEventListener('click', function(event){
     
     event.preventDefault();
     
-    const formattedFormData = new FormData(form);
+    const formattedFormData = {
+        tokenHolder: this.tokenHolder.value,
+        SubstrateAddress: this.SubstrateAddress.value,
+        AutoFinalSignature: this.AutoFinalSignature.value
+    }
     postData(formattedFormData);
 });
 
@@ -137,7 +141,7 @@ async function postData(formattedFormData){
 
     const response = await fetch('api',{
         method: 'POST',
-        body: formattedFormData
+        body: JSON.stringify(formattedFormData)
     });
     
     const data = await response.text();
