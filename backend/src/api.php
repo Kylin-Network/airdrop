@@ -32,6 +32,12 @@ if (!$redis->exists($user_ip_address)) {
 //Testing redis propose
 echo "Welcome " . $user_ip_address . " total calls made " . $total_user_calls . " in " . $time_period . " seconds";
 
+require_once './php-ecrecover/ecrecover_helper.php';
+$msg = 'Hello!!';
+$signed = '0x7b87a3c4dd63bee43d4c880391bb0aaaf210c12356406152a30edc424b9c4de62cc64a266b6faf22691a36489651f1cbf7dee1f028ba24b7d48e5552eac4c93f1b';
+echo personal_ecRecover($msg, $signed), "\n";
+
+
 $host = 'mysql';
 $user = 'dummy';
 $pass = 'dummy';
