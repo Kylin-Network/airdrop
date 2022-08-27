@@ -6,6 +6,7 @@ services:
     command: nginx -g "daemon off;"
     links:
       - php
+      - redis
       - frontend
     ports:
       - "8182:80"
@@ -43,6 +44,13 @@ services:
     restart: always
     ports:
       - 8085:80
+  redis:
+    container_name: redis
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    image: 'redis:alpine'
+    ports:
+      - '6379:6379'
   frontend:
     container_name: frontend
     build: ./frontend
