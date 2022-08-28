@@ -28,28 +28,44 @@ if (!$redis->exists($user_ip_address)) {
     }
 }
 // end doing rate limit check
-
+require_once './sql.php';
 //Testing redis propose
-echo "Welcome " . $user_ip_address . " total calls made " . $total_user_calls . " in " . $time_period . " seconds";
+echo "Welcome " . $user_ip_address . " total calls made " . $total_user_calls . " in " . $time_period . " seconds\n";
 
-require_once './php-ecrecover/ecrecover_helper.php';
-$msg = 'Hello!!';
-$signed = '0x7b87a3c4dd63bee43d4c880391bb0aaaf210c12356406152a30edc424b9c4de62cc64a266b6faf22691a36489651f1cbf7dee1f028ba24b7d48e5552eac4c93f1b';
-echo personal_ecRecover($msg, $signed), "\n";
-
-
-$host = 'mysql';
-$user = 'dummy';
-$pass = 'dummy';
- 
-$conn = mysqli_connect($host, $user, $pass);
-if (!$conn) {
-    exit('Connection failed: '.mysqli_connect_error().PHP_EOL);
-}
- 
 $data = json_decode(file_get_contents('php://input'), true);
 // echo $data["tokenHolder"];
 // echo $data["SubstrateAddress"];
 // echo $data["AutoFinalSignature"];
+if (($data["tokenHolder"]!='')&&($data["SubstrateAddress"]!='')&&($data["AutoFinalSignature"]!='')) {
+    require_once './php-ecrecover/ecrecover_helper.php';
+    $msg = $data["SubstrateAddress"];
+    $signed = $data["AutoFinalSignature"];
+    
+    // performs the actual signature validation and if is valid will be inserted int 'requests' table for future processing
+    if (personal_ecRecover($msg, $signed)==$data["tokenHolder"]) {
+        // Escape user inputs for security
+        $tokenHolder = mysqli_real_escape_string($conn, $data["tokenHolder"]);
+        $SubstrateAddress = mysqli_real_escape_string($conn, $data["SubstrateAddress"]);
+        $AutoFinalSignature = mysqli_real_escape_string($conn, $data["AutoFinalSignature"]);
+        $datetime=date('Y-m-d H:i:s');
+        // Attempt insert query execution
+        $sql = "INSERT INTO requests (tokenHolder, SubstrateAddress, AutoFinalSignature, manuallysigned, ipaddress, datetime) VALUES ('$tokenHolder', '$SubstrateAddress', '$AutoFinalSignature',0,'$user_ip_address','$datetime')";
+        if(mysqli_query($conn, $sql)){
+                echo "Records added successfully.";
+                } else{
+                    echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
+                }
+    } else {
+        echo "signature is not valid";
+    }
+    
+} else {
+    echo "invalid data submited";
+    exit();
+}
 
+
+ 
+
+mysqli_close($conn);
 ?>
