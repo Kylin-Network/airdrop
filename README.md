@@ -8,10 +8,19 @@ The solution is based on the possibility of signing any message using the privat
 ![alt text](https://github.com/Kylin-Network/airdrop/blob/main/doc/tech_flow.jpg?raw=true)
 
 # Technical details
-
+The solutions chosen it respects the good practice principle - one app one container. 
+Main containers:
+- redis - for rate limiting and ddos protection
+- mysql - db storage
+- php - php handler
+- frontend - static file serving for the frontend signe
+- phpmyadmin - easy DB administration for dev proposes
+- nginx - backend engine written in php, based on a nginx image linked to the php container
 
 # Run the frontend & backend
 ```bash
+git clone https://github.com/Kylin-Network/airdrop
+cd airdrop
 docker-compose build && docker-compose up
 ```
 If running on a local dev server with docker installed the components will be available on:
@@ -19,3 +28,5 @@ If running on a local dev server with docker installed the components will be av
 - frontend - http://127.0.0.1:8282/
 
 # Distribution script
+```bash
+```
