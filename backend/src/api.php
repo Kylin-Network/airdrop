@@ -30,7 +30,7 @@ if (!$redis->exists($user_ip_address)) {
 // end doing rate limit check
 
 //Testing rate-limit 
-echo "Welcome " . $user_ip_address . " total calls made " . $total_user_calls . " in " . $time_period . " seconds\n";
+echo "Debug: " . $user_ip_address . " total calls made " . $total_user_calls . " in " . $time_period . " seconds\n";
 
 require_once './sql.php';
 
@@ -39,50 +39,53 @@ $data = json_decode(file_get_contents('php://input'), true);
 // echo $data["SubstrateAddress"];
 // echo $data["AutoFinalSignature"];
 
-if (($data["tokenHolder"]!='')&&($data["SubstrateAddress"]!='')&&($data["AutoFinalSignature"]!='')) {
+if (isset($data["tokenHolder"]) && isset($data["SubstrateAddress"]) && isset($data["AutoFinalSignature"])&& !empty($data["tokenHolder"]) && !empty($data["SubstrateAddress"]) && !empty($data["AutoFinalSignature"])) {
     require_once './php-ecrecover/ecrecover_helper.php';
     $msg = $data["SubstrateAddress"];
     $signed = $data["AutoFinalSignature"];
-    
+    $manuallysigned = $data["manuallysigned"];
+
     // performs the actual signature validation and if is valid will be inserted int 'requests' table for future processing
+    try {
     if (personal_ecRecover($msg, $signed)==$data["tokenHolder"]) {
         // Escape user inputs for security
         $tokenHolder = mysqli_real_escape_string($conn, $data["tokenHolder"]);
         $SubstrateAddress = mysqli_real_escape_string($conn, $data["SubstrateAddress"]);
         $AutoFinalSignature = mysqli_real_escape_string($conn, $data["AutoFinalSignature"]);
-             
-        //checking if the holder did not made the request before
+        
+        //checking if the holder did not made the airdrop request before
         $check1 = mysqli_query($conn, "SELECT * FROM requests WHERE tokenHolder='".$tokenHolder."'");
         //checking the presence the in original KYL holder list
         $check2 = mysqli_query($conn, "SELECT * FROM holders WHERE HolderAddress='".$tokenHolder."'");
 
         if(mysqli_num_rows($check1) > 0){
-            echo "request already exists";
+            echo "ERROR: request already exists";
             exit();            
         }elseif (mysqli_num_rows($check2) == 0) {
-            echo "request already exists";
+            echo "ERROR: holder account not in the list";
             exit();    
         }
         
         // Attempt insert query execution
         $datetime=date('Y-m-d H:i:s');
-        $sql = "INSERT INTO requests (tokenHolder, SubstrateAddress, AutoFinalSignature, manuallysigned, ipaddress, datetime) VALUES ('$tokenHolder', '$SubstrateAddress', '$AutoFinalSignature',0,'$user_ip_address','$datetime')";
+        $sql = "INSERT INTO requests (tokenHolder, SubstrateAddress, AutoFinalSignature, manuallysigned, ipaddress, datetime) VALUES ('$tokenHolder', '$SubstrateAddress', '$AutoFinalSignature','$manuallysigned','$user_ip_address','$datetime')";
         if(mysqli_query($conn, $sql)){
-                echo "Records added successfully.";
+                echo "success";
                 } else{
                     echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
                 }
     } else {
-        echo "signature is not valid";
+        echo "ERROR: signature is not valid";
     }
-    
+    } catch (Exception $e) {
+        echo 'Caught exception: ',  $e->getMessage(), "\n";
+    }
+
 } else {
-    echo "invalid data submited";
+    echo "ERROR: invalid data submited";
     exit();
 }
 
-
- 
 
 mysqli_close($conn);
 ?>

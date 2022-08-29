@@ -18,14 +18,13 @@
             integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
             crossorigin="anonymous"></script>
 
-
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
 
 <body>
 
-    <div class="jumbotron jumbotron-fluid">
+<div class="jumbotron jumbotron-fluid">
     <div class="container">
         <h1 class="display-4">Ethereum Signature for the PICHU Airdrop</h1>
         <p class="lead">Sign your request to prove your are actual owner of original KYL tokens and receive PICHU tokens.</p>
@@ -62,7 +61,6 @@
             <button type="button" class="btn btn-dark" id="ethSignButton">Sign</button>
         </div>
     </div>  
-
     <div class="row border-bottom">
         <div class="col-6">
             <h3>Signature response</h3>
@@ -71,19 +69,24 @@
             <textarea class="form-control" id="AutoFinalSignature" name="AutoFinalSignature" rows="3" readonly></textarea>
         </div>
     </div>  
-   
     <div class="row border-bottom">
         <div class="col-6">
            
         </div>
         <div class="col-6">
+            <input type="hidden" value="0" name="manuallysigned" id="manuallysigned">
             <input type="submit" value="Submit request using Option 1" class="btn btn-primary">
-        
         </div>
     </div>  
 </div>
 </form>
 
+<div id="messages" class="hidden" >
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <div id="messages_content"></div>
+</div>
+
+<form action="/api" method="GET" id="option2_form">
 <div class="container">
     <div class="row border-bottom">
         <p class="lead">Option 2 - Manually generate your Signature using <a href="https://etherscan.io/verifiedSignatures#" target="_blank">https://etherscan.io</a> (the "Sign Message" button).</p>
@@ -93,7 +96,7 @@
             <h3>Ethereum account</h3>
         </div>
         <div class="col-6">
-            <input class="form-control" id="manualTokenHolder" type="text">
+            <input class="form-control" id="tokenHolder2" name="tokenHolder2" type="text">
         </div>
     </div>
     <div class="row border-bottom">
@@ -101,7 +104,7 @@
             <h3>Substrate account (<a href="https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fkusama.kylin-node.co.uk#/accounts" target="_blank">PICHU</a>)</h3>
         </div>
         <div class="col-6">
-            <input class="form-control" id="manualSubstrateAddress" type="text" placeholder="23ee...">
+            <input class="form-control" id="SubstrateAddress2" name="SubstrateAddress2" type="text" placeholder="23ee...">
         </div>
     </div>
     <div class="row border-bottom">
@@ -109,7 +112,7 @@
             <h3>Signature response</h3>
         </div>
         <div class="col-6">
-            <textarea class="form-control" id="manualFinalSignature" rows="3"></textarea>
+            <textarea class="form-control" id="AutoFinalSignature2" name="AutoFinalSignature2" rows="3"></textarea>
         </div>
     </div>  
     <div class="row border-bottom">
@@ -117,10 +120,13 @@
            
         </div>
         <div class="col-6">
+            <input type="hidden" value="1" name="manuallysigned2" id="manuallysigned2">
             <button type="submit" class="btn btn-primary">Submit request using Option 2</button>
+
         </div>
     </div>  
 </div>
+</form>
 
 </body>
 

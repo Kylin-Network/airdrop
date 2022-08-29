@@ -123,16 +123,58 @@ function ethSignTypedData(version) {
 };
 
 
-const form = document.getElementById('option1_form');
+const form1 = document.getElementById('option1_form');
 
-form.addEventListener('click', function(event){
+form1.addEventListener('submit', function(event){
     
     event.preventDefault();
     
+    if (tokenHolder.value == "") {
+        alert("You need to specify a token holder!");
+        return;
+    }
+    if (SubstrateAddress.value=="") {
+        alert("You need to specify a substrate address!");
+        return;
+    }
+    if (AutoFinalSignature.value=="") {
+        alert("You need to specify a auto final signature!");
+        return;
+    }
+
     const formattedFormData = {
         tokenHolder: this.tokenHolder.value,
         SubstrateAddress: this.SubstrateAddress.value,
+        manuallysigned: this.manuallysigned.value,
         AutoFinalSignature: this.AutoFinalSignature.value
+    }
+    postData(formattedFormData);
+});
+
+const form2 = document.getElementById('option2_form');
+
+form2.addEventListener('submit', function(event){
+    
+    event.preventDefault();
+
+    if (tokenHolder2.value == "") {
+        alert("You need to specify a token holder!");
+        return;
+    }
+    if (SubstrateAddress2.value=="") {
+        alert("You need to specify a substrate address!");
+        return;
+    }
+    if (AutoFinalSignature2.value=="") {
+        alert("You need to specify a auto final signature!");
+        return;
+    }
+    
+    const formattedFormData = {
+        tokenHolder: this.tokenHolder2.value,
+        SubstrateAddress: this.SubstrateAddress2.value,
+        manuallysigned: this.manuallysigned2.value,
+        AutoFinalSignature: this.AutoFinalSignature2.value
     }
     postData(formattedFormData);
 });
@@ -146,8 +188,15 @@ async function postData(formattedFormData){
     
     const data = await response.text();
     //This should now print out the values that we sent to the backend-side
+    if (data.includes("success")) {
+        $('#messages').removeClass('hidden').addClass('alert alert-success ');
+        $('#messages_content').html('Airdrop submission successful!');
+    }
+
     console.log(data);
 }
+
+
 
 },{"eth-sig-util":30,"ethereumjs-util":47}],2:[function(require,module,exports){
 (function (global){(function (){
