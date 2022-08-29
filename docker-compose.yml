@@ -8,6 +8,7 @@ services:
       - php
       - redis
       - frontend
+      - mysql
     ports:
       - "8182:80"
     volumes:
@@ -21,8 +22,8 @@ services:
       - ./backend/src:/var/www/html
     working_dir: /var/www/html
   mysql:
-    image: mysql:8.0.27
     container_name: mysql
+    build: ./backend/docker/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
