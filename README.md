@@ -11,7 +11,7 @@ The solution is based on the possibility of signing any message using the privat
 The solutions chosen it respects the good practice principle - one app one container. 
 Main containers:
 - redis - for rate limiting and ddos protection
-- mysql - db storage
+- mysql - db storage (initial database structure and data are found in ./backend/docker/mysql/dump.sql)
 - php - php handler
 - frontend - static file serving for the frontend signe
 - phpmyadmin - easy DB administration for dev proposes

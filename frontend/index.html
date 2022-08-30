@@ -23,110 +23,110 @@
 </head>
 
 <body>
-
-<div class="jumbotron jumbotron-fluid">
+    <img src="assets/logoWhite.svg" class="kylogo-l" style="margin: 20px;" alt="">
+      
+<section class="kylin">
+                
+    <div class="kylin-title" style="margin: 10px;">PICHU Airdrop - Requesting your Ethereum Signature </div>            
+    <p style="margin-left: 20px;"> Sign your request to prove your are actual owner of original KYL tokens and receive PICHU tokens.</p>
+        <div class="kylin-item">
+          <div class="kylin-info">
+ 
+            <form action="/api" method="GET" id="option1_form">
+    
+        <div class="row">
+            <div class="kylin-title">Option 1</div> <p> Please sign you request using your Metamask Wallet</p>
+        </div>
+        <div class="row">
+                <button type="button" class="kylin-button" id="connectButton">1. Connect your Metamask extension</button>
+                <input class="kylin-input" id="tokenHolder" name="tokenHolder" type="text" readonly placeholder="your Ethereum address">
+        </div>
+        <div class="row">
+                <input class="kylin-input" id="SubstrateAddress" type="text" placeholder="Your substrate account from PICHU Network" name="SubstrateAddress">
+        </div>
+        <div class="row">
+                <button type="button" class="kylin-button" id="ethSignButton">2. Sign the Message</button>
+        </div>  
+        <div class="row">
+                <textarea class="kylin-input" style="height: 85px;" id="AutoFinalSignature" name="AutoFinalSignature" rows="3" readonly placeholder="Signature response"></textarea>
+        </div>  
+        <div class="row">
+                <input type="hidden" value="0" name="manuallysigned" id="manuallysigned">
+                <input type="submit" value="Submit request using Option 1" class="kylin-button">
+        </div>  
+    </div>
+    </form>
+    </div>
+        
+    <div class="kylin-item">
+    <form action="/api" method="GET" id="option2_form">
     <div class="container">
-        <h1 class="display-4">Ethereum Signature for the PICHU Airdrop</h1>
-        <p class="lead">Sign your request to prove your are actual owner of original KYL tokens and receive PICHU tokens.</p>
+        <div class="row">
+            <div class="kylin-title">Option 2</div> <p> Manually generate your Signature using <a href="https://etherscan.io/verifiedSignatures#" target="_blank">https://etherscan.io</a> (using the "Sign Message" button).</p>
+        </div>
+        <div class="row">
+                <input class="kylin-input" id="tokenHolder2" name="tokenHolder2" type="text" placeholder="Ethereum account">
+        </div>
+        <div class="row">
+                <input class="kylin-input" id="SubstrateAddress2" name="SubstrateAddress2" type="text" placeholder="Your substrate account from PICHU Network">
+        </div>
+        <div class="row">
+                <textarea class="kylin-input" style="height: 85px;" id="AutoFinalSignature2" name="AutoFinalSignature2" rows="3" placeholder="Signature response"></textarea>
+        </div>  
+        <div class="row">
+                <input type="hidden" value="1" name="manuallysigned2" id="manuallysigned2">
+                <button type="submit" class="kylin-button">Submit request using Option 2</button>
+        </div>  
     </div>
-</div>
+    </form>
+    </div>
+    </div>
+  
+    
+  </section>
 
-<form action="/api" method="GET" id="option1_form">
-<div class="container">
-    <div class="row border-bottom">
-        <p class="lead">Option 1 - Please sign you request using your Metamask Wallet</p>
-     
+  <footer class="container">
+    <div class="el-row">
+        <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-6">
+            <img src="/assets/logo_footer.svg" alt=""><p class="footer-logo-info">The Polkadot Data Blockchain</p></div>
+            <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-9">
+                <div class="el-row"><div class="el-col el-col-8">
+                    <div class="foot-link">
+                        <div class="foot-link-head">About</div>
+                        <ul><li>Technology</li><li>Crowdloan</li><li>Tokenomics</li><li>Contact Us</li></ul></div></div>
+                        <div class="el-col el-col-8">
+                            <div class="foot-link">
+                                <div class="foot-link-head">Resources</div>
+                                <ul><li><a href="https://wiki.kylin.network">Project Wiki</a></li><li><a href="https://docsend.com/view/kfrc2q57c3fwwkzs">Whitepaper</a></li><li><a href="https://docsend.com/view/2fwcfhs8mbyjnqcy">Overview Deck</a></li><li><a href="https://github.com/Kylin-Network">Github Repos</a></li></ul>
+                            </div>
+                        </div>
+                        <div class="el-col el-col-8"><div class="foot-link">
+                            <div class="foot-link-head">Foundation</div>
+                            <ul><li>Team &amp; Advisors</li><li>Ecosystem</li><li>Press about Us</li><li>Roadmap</li></ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="el-col el-col-24 el-col-xs-24 el-col-sm-24 el-col-md-4">
+                <div class="foot-link"><div class="foot-link-head">Contact</div>
+                <div class="social">
+                    <div class="social-item">
+                        <a href="https://twitter.com/Kylin_Network"><img src="/assets/social-twitter.1929d2d0.svg" alt="twitter"></a>
+                        <a href="#"><img src="/assets/social-email.10251146.svg" alt="email"></a>
+                        <a href="https://medium.com/kylin-network"><img src="/assets/social_medium.29340428.svg" alt="medium"></a>
+                    </div>
+                    <div class="social-item">
+                        <a href="https://t.me/KylinOfficial"><img src="/assets/social_telegram.d4dc92a4.svg" alt="telegram"></a>
+                        <a href="https://discord.com/invite/PwYCssr"><img src="/assets/social_discord.712c3ac3.svg" alt="discord"></a>
+                        <a href="https://github.com/Kylin-Network"><img src="/assets/social_github.66fbc486.svg" alt="github"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="row border-bottom">
-        <div class="col-6">
-            <h3>Connect</h3>
-        </div>
-        <div class="col-6">
-            <button type="button" class="btn btn-dark" id="connectButton">Connect</button><input class="form-control" id="tokenHolder" name="tokenHolder" type="text" readonly>
-        </div>
-    </div>
-    <div class="row border-bottom">
-        <div class="col-6">
-            <h3>Substrate account (<a href="https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fkusama.kylin-node.co.uk#/accounts" target="_blank">PICHU</a>)</h3>
-        </div>
-        <div class="col-6">
-            <input class="form-control" id="SubstrateAddress" type="text" placeholder="23ee..." name="SubstrateAddress">
-        </div>
-    </div>
-    <div class="row border-bottom">
-        <div class="col-6">
-            <h3>Sign the request</h3>
-        </div>
-        <div class="col-6">
-            <button type="button" class="btn btn-dark" id="ethSignButton">Sign</button>
-        </div>
-    </div>  
-    <div class="row border-bottom">
-        <div class="col-6">
-            <h3>Signature response</h3>
-        </div>
-        <div class="col-6">
-            <textarea class="form-control" id="AutoFinalSignature" name="AutoFinalSignature" rows="3" readonly></textarea>
-        </div>
-    </div>  
-    <div class="row border-bottom">
-        <div class="col-6">
-           
-        </div>
-        <div class="col-6">
-            <input type="hidden" value="0" name="manuallysigned" id="manuallysigned">
-            <input type="submit" value="Submit request using Option 1" class="btn btn-primary">
-        </div>
-    </div>  
-</div>
-</form>
+    <hr class="mt-5"><p class="small copyright"> © Copyright: 2022 Kylin Network. All Rights Reserved. </p>
+</footer>
 
-<div id="messages" class="hidden" >
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    <div id="messages_content"></div>
-</div>
-
-<form action="/api" method="GET" id="option2_form">
-<div class="container">
-    <div class="row border-bottom">
-        <p class="lead">Option 2 - Manually generate your Signature using <a href="https://etherscan.io/verifiedSignatures#" target="_blank">https://etherscan.io</a> (the "Sign Message" button).</p>
-    </div>
-    <div class="row border-bottom">
-        <div class="col-6">
-            <h3>Ethereum account</h3>
-        </div>
-        <div class="col-6">
-            <input class="form-control" id="tokenHolder2" name="tokenHolder2" type="text">
-        </div>
-    </div>
-    <div class="row border-bottom">
-        <div class="col-6">
-            <h3>Substrate account (<a href="https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Fkusama.kylin-node.co.uk#/accounts" target="_blank">PICHU</a>)</h3>
-        </div>
-        <div class="col-6">
-            <input class="form-control" id="SubstrateAddress2" name="SubstrateAddress2" type="text" placeholder="23ee...">
-        </div>
-    </div>
-    <div class="row border-bottom">
-        <div class="col-6">
-            <h3>Signature response</h3>
-        </div>
-        <div class="col-6">
-            <textarea class="form-control" id="AutoFinalSignature2" name="AutoFinalSignature2" rows="3"></textarea>
-        </div>
-    </div>  
-    <div class="row border-bottom">
-        <div class="col-6">
-           
-        </div>
-        <div class="col-6">
-            <input type="hidden" value="1" name="manuallysigned2" id="manuallysigned2">
-            <button type="submit" class="btn btn-primary">Submit request using Option 2</button>
-
-        </div>
-    </div>  
-</div>
-</form>
 
 </body>
 
@@ -134,10 +134,4 @@
 
 </html>
 
-<!doctype html>
-<html>
-<head>
-    <title>Test</title>
-</head>
-<body></body>
-</html>
+
