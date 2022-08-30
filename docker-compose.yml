@@ -7,7 +7,6 @@ services:
     links:
       - php
       - redis
-      - frontend
       - mysql
     ports:
       - "8182:80"
@@ -54,6 +53,8 @@ services:
       - '6379:6379'
   frontend:
     container_name: frontend
+    links:
+      - nginx
     build: ./frontend
     ports:
       - "8282:80"
