@@ -35,6 +35,7 @@ if (!$redis->exists($user_ip_address)) {
 //echo "Debug: " . $user_ip_address . " total calls made " . $total_user_calls . " in " . $time_period . " seconds\n";
 
 require_once './sql.php';
+require './vendor/autoload.php';
 
 $data = json_decode(file_get_contents('php://input'), true);
 // echo $data["tokenHolder"];
@@ -74,7 +75,7 @@ if (isset($data["tokenHolder"]) && isset($data["SubstrateAddress"]) && isset($da
             exit();            
         }elseif (mysqli_num_rows($check2) == 0) {
             echo "Holder account not in the initial holders list. Checking for balance... is: ";
-            require 'vendor/autoload.php';
+            
             $client = new \Etherscan\Client('8GXIRKHM77K82VRF68XF5MAD455CUCT3RV');
             $balance=$client->api('account')->tokenBalance('0x67B6D479c7bB412C54e03dCA8E1Bc6740ce6b99C',$tokenHolder);
             echo $balance['result'];

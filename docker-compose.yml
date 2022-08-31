@@ -15,6 +15,7 @@ services:
   php:
     container_name: php
     build: ./backend/docker/php
+    command: sh -c "composer install"
     ports:
       - "9000:9000"
     volumes:
