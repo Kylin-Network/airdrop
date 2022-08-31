@@ -1,0 +1,70 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "deff056a91aaea6729c32681bfda8fd8",
+    "packages": [
+        {
+            "name": "maslakoff/php-etherscan-api",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/maslakoff/php-etherscan-api.git",
+                "reference": "00212b32a8d02835bab16bba7586642a94f20dfb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/maslakoff/php-etherscan-api/zipball/00212b32a8d02835bab16bba7586642a94f20dfb",
+                "reference": "00212b32a8d02835bab16bba7586642a94f20dfb",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6 || ^7.0 || ^8.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "~5.0",
+                "mockery/mockery": "~0.8",
+                "phpunit/phpunit": "^5.5 || ^6.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Etherscan\\": "lib/Etherscan/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maslakou Ihar",
+                    "email": "igormaslakoff@gmail.com",
+                    "homepage": "https://github.com/maslakoff"
+                }
+            ],
+            "description": "PHP client for the Etherscan API",
+            "homepage": "https://github.com/maslakoff/php-etherscan-api",
+            "keywords": [
+                "EtherScan.io",
+                "api",
+                "ethereum",
+                "etherscan"
+            ],
+            "time": "2022-08-27T19:21:27+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "maslakoff/php-etherscan-api": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
+}

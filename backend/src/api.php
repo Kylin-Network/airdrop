@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ERROR | E_PARSE);
+
 //doing rate limit check	
 $redis = new Redis();
 $redis->connect('redis', 6379);
@@ -30,7 +32,7 @@ if (!$redis->exists($user_ip_address)) {
 // end doing rate limit check
 
 //Testing rate-limit 
-echo "Debug: " . $user_ip_address . " total calls made " . $total_user_calls . " in " . $time_period . " seconds\n";
+//echo "Debug: " . $user_ip_address . " total calls made " . $total_user_calls . " in " . $time_period . " seconds\n";
 
 require_once './sql.php';
 
@@ -44,14 +46,23 @@ if (isset($data["tokenHolder"]) && isset($data["SubstrateAddress"]) && isset($da
     $msg = $data["SubstrateAddress"];
     $signed = $data["AutoFinalSignature"];
     $manuallysigned = $data["manuallysigned"];
+      
+    // Escape user inputs for security
+    $tokenHolder = mysqli_real_escape_string($conn, $data["tokenHolder"]);
+    $SubstrateAddress = mysqli_real_escape_string($conn, $data["SubstrateAddress"]);
+    $AutoFinalSignature = mysqli_real_escape_string($conn, $data["AutoFinalSignature"]);
+    
+    $EthereumValidator = new EthereumValidator();
+
+    if (!$EthereumValidator->isAddress($tokenHolder)) {
+        echo "Token Holder address is invalid.";
+        exit();
+    }
 
     // performs the actual signature validation and if is valid will be inserted int 'requests' table for future processing
     try {
     if (personal_ecRecover($msg, $signed)==$data["tokenHolder"]) {
-        // Escape user inputs for security
-        $tokenHolder = mysqli_real_escape_string($conn, $data["tokenHolder"]);
-        $SubstrateAddress = mysqli_real_escape_string($conn, $data["SubstrateAddress"]);
-        $AutoFinalSignature = mysqli_real_escape_string($conn, $data["AutoFinalSignature"]);
+  
         
         //checking if the holder did not made the airdrop request before
         $check1 = mysqli_query($conn, "SELECT * FROM requests WHERE tokenHolder='".$tokenHolder."'");
@@ -62,23 +73,31 @@ if (isset($data["tokenHolder"]) && isset($data["SubstrateAddress"]) && isset($da
             echo "ERROR: request already exists";
             exit();            
         }elseif (mysqli_num_rows($check2) == 0) {
-            echo "ERROR: holder account not in the list";
-            exit();    
+            echo "Holder account not in the initial holders list. Checking for balance... is: ";
+            require 'vendor/autoload.php';
+            $client = new \Etherscan\Client('8GXIRKHM77K82VRF68XF5MAD455CUCT3RV');
+            $balance=$client->api('account')->tokenBalance('0x67B6D479c7bB412C54e03dCA8E1Bc6740ce6b99C',$tokenHolder);
+            echo $balance['result'];
+            if ($balance['result']==0) {
+             
+                exit();
+            } 
+         
         }
         
         // Attempt insert query execution
         $datetime=date('Y-m-d H:i:s');
         $sql = "INSERT INTO requests (tokenHolder, SubstrateAddress, AutoFinalSignature, manuallysigned, ipaddress, datetime) VALUES ('$tokenHolder', '$SubstrateAddress', '$AutoFinalSignature','$manuallysigned','$user_ip_address','$datetime')";
         if(mysqli_query($conn, $sql)){
-                echo "success";
+                echo "Valid request! Thank you!";
                 } else{
                     echo "ERROR: Could not able to execute $sql. " . mysqli_error($conn);
                 }
     } else {
-        echo "ERROR: signature is not valid";
+        echo "ERROR: signature submitted is not valid";
     }
     } catch (Exception $e) {
-        echo 'Caught exception: ',  $e->getMessage(), "\n";
+        echo '"ERROR: Caught exception: ',  $e->getMessage(), "\n";
     }
 
 } else {
